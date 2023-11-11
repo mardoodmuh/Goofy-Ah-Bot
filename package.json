@@ -12,5 +12,6 @@
   "dependencies": {
     "discord.js": "^14.13.0",
     "unofficial-jisho-api": "^2.3.4"
-  }
+  },
+  "type": "module"
 }

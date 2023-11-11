@@ -1,5 +1,5 @@
-const { EmbedBuilder, Client, IntentsBitField } = require('discord.js');
-const JishoAPI = require('unofficial-jisho-api');
+import { EmbedBuilder, Client, IntentsBitField } from 'discord.js';
+import JishoAPI from 'unofficial-jisho-api';
 
 const jisho = new JishoAPI();
 
@@ -43,4 +43,4 @@ client.on('messageCreate', (msg) => {
     }
 })
 
-client.login('');
+client.login('MTE3Mjc3MzgyMjI1NzE4ODg5NQ.GakyiL.BllxZygdmQQ6XI3G6z3J6Khqy2j_DHPLyWtz8Q');
