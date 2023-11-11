@@ -34,7 +34,7 @@ client.on('messageCreate', (msg) => {
                     .addFields(
                         { name: 'Onyomi', value: r.onyomi.toString(), inline: true },
                         { name: 'Kunyomi', value: r.kunyomi.toString(), inline: true },
-                        // { name: 'Radicals', vlaue: r.radical.toString(), inline: true },
+                        { name: 'Radical', value: ("Symbol: " + r.radical['symbol'].toString() + "\nMeaning: " + r.radical['meaning'].toString()).toString(), inline: true },
                     )
                     .setFooter({ text: "Created by Goofy Ah devs" });
                 msg.channel.send({ embeds: [kanjiEmbed] })
