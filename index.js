@@ -1,4 +1,7 @@
-const { Client, IntentsBitField } = require('discord.js');
+const { EmbedBuilder, Client, IntentsBitField } = require('discord.js');
+const JishoAPI = require('unofficial-jisho-api');
+
+const jisho = new JishoAPI();
 
 const client = new Client({
     intents: [
@@ -14,12 +17,34 @@ client.on('ready', (e) => {
 })
 
 client.on('messageCreate', (msg) => {
-    if (msg.content == 'ping') {
-        msg.reply('pong');
-    }
-    if (msg.content == 'hello') {
-        msg.reply('hey!')
+    var message = msg.content.split(" ");
+
+    if (msg.content.startsWith("!kanji")) {
+        var kanji = message[1];
+        jisho.searchForKanji(kanji).then(r => {
+            jisho.searchForExamples(kanji).then(res => {
+                const examples = [];
+
+                var kanjiEmbed = new EmbedBuilder()
+                    .setColor(0x1a7e4c)
+                    .setTitle("Kanji result for: " + kanji)
+                    .setAuthor({ name: 'Kanji Bot', iconURL: client.user.defaultAvatarURL })
+                    .setDescription("Kanji taught in " + r.taughtIn + ", JLPT Level: " + r.jlptLevel + "\nStroke count: " + r.strokeCount)
+                    .setThumbnail(r.strokeOrderGifUri)
+                    .addFields(
+                        { name: 'Onyomi', value: r.onyomi.toString(), inline: true },
+                        { name: 'Kunyomi', value: r.kunyomi.toString(), inline: true },
+                        // { name: 'Radicals', vlaue: r.radical.toString(), inline: true },
+                    )
+                    .setFooter({ text: "Created by Goofy Ah devs" });
+
+                // msg.reply(`
+                // JLPT Level: ${r.jlptLevel}\nStroke count: ${r.strokeCount}\nMeaning: ${r.meaning}\nKunyomi: ${JSON.stringify(r.kunyomi)}\nKunyomi example: ${JSON.stringify(r.kunyomiExamples[0])}\nOnyomi: ${JSON.stringify(r.onyomi)}\nOnyomi example: ${JSON.stringify(r.onyomiExamples[0])}\nJisho Uri: ${r.uri}
+                // `);
+                msg.channel.send({ embeds: [kanjiEmbed] })
+            })
+        });
     }
 })
 
-client.login('MTE3Mjc3MzgyMjI1NzE4ODg5NQ.G4rnlU.EjTnod8Rzt3etOY9rjv0zFfAoCo-kjjCBaRQ8E');
+client.login('MTE3Mjc3MzgyMjI1NzE4ODg5NQ.GdgXlE.LRdea8xUDRss4Kjko5ECu2MQFIB0oWStSGNu2Y');
