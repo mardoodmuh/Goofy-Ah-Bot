@@ -37,14 +37,10 @@ client.on('messageCreate', (msg) => {
                         // { name: 'Radicals', vlaue: r.radical.toString(), inline: true },
                     )
                     .setFooter({ text: "Created by Goofy Ah devs" });
-
-                // msg.reply(`
-                // JLPT Level: ${r.jlptLevel}\nStroke count: ${r.strokeCount}\nMeaning: ${r.meaning}\nKunyomi: ${JSON.stringify(r.kunyomi)}\nKunyomi example: ${JSON.stringify(r.kunyomiExamples[0])}\nOnyomi: ${JSON.stringify(r.onyomi)}\nOnyomi example: ${JSON.stringify(r.onyomiExamples[0])}\nJisho Uri: ${r.uri}
-                // `);
                 msg.channel.send({ embeds: [kanjiEmbed] })
             })
         });
     }
 })
 
-client.login('MTE3Mjc3MzgyMjI1NzE4ODg5NQ.GdgXlE.LRdea8xUDRss4Kjko5ECu2MQFIB0oWStSGNu2Y');
+client.login('');
